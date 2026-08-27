@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+    <rect width="1200" height="630" fill="#121210" />
+    <g stroke="#322F26" stroke-width="1">
+        <line x1="0" y1="150" x2="1200" y2="150" />
+        <line x1="0" y1="480" x2="1200" y2="480" />
+    </g>
+    <g stroke="#FFB020" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" transform="translate(560, 210) scale(3.4)">
+        <circle cx="12" cy="5" r="3" />
+        <line x1="12" x2="12" y1="22" y2="8" />
+        <path d="M5 12H2a10 10 0 0 0 18 0h-3" />
+    </g>
+    <text x="600" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="72" font-weight="700" fill="#F4EFE4">openVESSL</text>
+    <text x="600" y="480" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" letter-spacing="4" fill="#A39C8A">AN OPEN-SOURCE ORG, BUILT LIKE A SHIP</text>
+</svg>

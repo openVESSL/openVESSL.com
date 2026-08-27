@@ -1,0 +1,17 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/sections/Hero.astro';
+import MissionSection from '@/components/sections/MissionSection.astro';
+import ProductsShowcase from '@/components/sections/ProductsShowcase.astro';
+import CollabCTA from '@/components/sections/CollabCTA.astro';
+---
+
+<BaseLayout
+  title="openVESSL, an open-source org built like a ship"
+  description="openVESSL builds self-hosted tools, each one named after the part of the vessel it plays. First shipped: Anchorr, a Discord bot for Seerr requests and Jellyfin notifications."
+>
+  <Hero />
+  <MissionSection />
+  <ProductsShowcase />
+  <CollabCTA />
+</BaseLayout>

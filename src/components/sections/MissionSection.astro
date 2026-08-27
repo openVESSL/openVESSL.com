@@ -1,0 +1,105 @@
+---
+import { Anchor, Compass, Navigation, Flag, LifeBuoy, Waves } from 'lucide-react';
+
+const vesselParts = [
+  { icon: Anchor, label: 'Anchorr', shipped: true },
+  { icon: Compass, label: 'Compass', shipped: false },
+  { icon: Navigation, label: 'Helm', shipped: false },
+  { icon: Flag, label: 'Flag', shipped: false },
+  { icon: LifeBuoy, label: 'Lifebuoy', shipped: false },
+  { icon: Waves, label: 'Hull', shipped: false },
+];
+---
+
+<section id="mission" class="border-t border-border bg-secondary/30">
+  <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+    <div class="grid gap-12 md:grid-cols-2 md:gap-16">
+      <div class="max-w-md">
+        <span class="inline-flex items-center rounded-sm border border-border bg-secondary px-3 py-1 font-mono text-xs uppercase tracking-wider text-muted-foreground">
+          Why the naming
+        </span>
+        <h2 class="mt-4 font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
+          Every tool is a part of the vessel
+        </h2>
+        <div class="mt-5 space-y-4 text-muted-foreground">
+          <p>
+            No single part of a vessel gets it anywhere on its own. The anchor doesn't
+            steer, the compass doesn't hold, the hull doesn't decide where to go, but
+            take any one away and you're not going anywhere either.
+          </p>
+          <p>
+            That's the shape we want for openVESSL: small, independent tools that each
+            do one real job well, released as their own open-source projects, named
+            after whichever part of the ship they are.
+          </p>
+          <p>
+            Right now there's one part built. More get added as they're actually
+            finished, not promised.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-3 gap-4 self-start sm:gap-5">
+        {vesselParts.map(({ icon: Icon, label, shipped }) => {
+          const Wrapper = shipped ? 'a' : 'div';
+          return (
+            <Wrapper
+              href={shipped ? '/anchorr' : undefined}
+              class="flex flex-col items-center gap-2.5"
+              class:list={shipped && 'group'}
+            >
+              <div
+                class:list={[
+                  'flex size-16 items-center justify-center rounded-full border-2 transition-transform',
+                  shipped
+                    ? 'gauge-lit border-primary bg-secondary group-hover:scale-105'
+                    : 'border-dashed border-border bg-transparent',
+                ]}
+              >
+                {label === 'Anchorr' ? (
+                  <span class="anchorr-logo size-8 bg-foreground" aria-hidden="true"></span>
+                ) : (
+                  <Icon
+                    className={`size-6 ${shipped ? 'text-primary' : 'text-muted-foreground/40'}`}
+                    strokeWidth={1.75}
+                    aria-hidden="true"
+                  />
+                )}
+              </div>
+              <span
+                class:list={[
+                  'font-mono text-[11px] uppercase tracking-wider',
+                  shipped ? 'text-foreground group-hover:text-primary' : 'text-muted-foreground/50',
+                ]}
+              >
+                {label}{!shipped && '*'}
+              </span>
+            </Wrapper>
+          );
+        })}
+        <p class="col-span-3 mt-1 text-right font-mono text-[11px] uppercase tracking-wider text-muted-foreground/40">
+          *Placeholder app ideas
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gauge-lit {
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--primary) 15%, transparent),
+      0 0 18px color-mix(in oklab, var(--primary) 35%, transparent);
+  }
+
+  .anchorr-logo {
+    display: inline-block;
+    -webkit-mask-image: url('/anchorr-logo.svg');
+    mask-image: url('/anchorr-logo.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+</style>

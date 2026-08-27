@@ -1,0 +1,63 @@
+---
+import '@/styles/global.css';
+import SiteNav from '@/components/nav/SiteNav';
+import WaveFooter from '@/components/sections/WaveFooter';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL('/og.svg', Astro.site)} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+  </head>
+  <body class="min-h-screen bg-background text-foreground antialiased">
+    <!--
+      THESIS: openVESSL as the vessel's own bridge console — a live instrument panel,
+      not a SaaS gradient hero or icon-card grid.
+      OWN-WORLD: Catppuccin Macchiato panel #24273a, soft blue-white text #cad3f5,
+      single accent #495aba, muted status-green #a6da95 reserved for "shipped."
+      Space Grotesk for headings/body, Space Mono for readouts/labels/badges. Bezeled
+      rectangular panels, toggle-switch nav, gauge-bezel icon frames, LED-dot status.
+      STORY: visitor reads openVESSL as a small real technical org building ship-part
+      named tools; trusts it because it reads as instrument, not marketing; browses
+      the Anchorr panel or reaches out to collaborate.
+      FIRST VIEWPORT: dark console panel, full-bleed. Toggle-switch nav along the top
+      edge. Amber status line boots in above the headline, subhead below, one primary
+      console-button CTA plus a bordered secondary, small mono readout anchoring a
+      corner.
+      FORM: Marine Instrument Console — assigned direction 4 of 7 grounded directions
+      (chandlery catalog, chart, AIS dashboard, VHF console, manifest, buoy markers,
+      knot diagram), seed 87810a5b.
+      FINISH: unreviewed and undocumented is unfinished; this build ends with the
+      finish review, the verdict, and DESIGN.md
+    -->
+    <SiteNav client:load />
+    <main>
+      <slot />
+    </main>
+    <WaveFooter client:load />
+  </body>
+</html>

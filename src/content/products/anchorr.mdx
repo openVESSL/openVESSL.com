@@ -1,0 +1,30 @@
+---
+name: Anchorr
+vesselPart: Anchor
+subtitle: Your Seerr companion
+tagline: Discord bot for requesting movies/TV and receiving notifications when items are added to your media server.
+status: shipped
+repoUrl: https://github.com/openVESSL/Anchorr
+icon: Anchor
+partNo: ANCHOR-01
+tags: [Discord, Jellyfin, Seerr, Radarr, Sonarr, Self-hosted]
+---
+
+The missing link for your media server. Anchorr connects Jellyfin and Seerr to your Discord community for real-time notifications and easy media requests.
+
+## Features
+
+- **`/search <title>`**: search for a movie or show with auto-suggestions. An embed with detailed information is shown, from which you can request the media. For TV shows, pick the seasons you want.
+- **`/request <title>`**: instantly send a request for your chosen movie or show straight to Seerr. For TV shows, this requests all seasons automatically.
+- **Notifications**: get well-formatted alerts in a Discord channel of your choice whenever new media lands in your Jellyfin library.
+- **Rich metadata**: powered by TMDB and OMDb, every Discord message carries a clean, well-structured summary of the requested or added title.
+
+## Under the hood
+
+Node.js 18+, Docker and Docker Compose, integrating with Jellyfin, Seerr, TMDB, OMDb, and Discord.
+
+## Self-hosted, full control
+
+This version of Anchorr is open-source and self-hosted, so you run it on your own infrastructure and control exactly how it works. A hosted, easier-to-configure version of the bot is also in the works for people who'd rather skip running a server themselves, follow the GitHub repo for updates.
+
+Setup, configuration, and the full README live in the repo. That's the source of truth, not this page.

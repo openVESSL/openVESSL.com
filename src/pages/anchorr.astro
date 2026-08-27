@@ -1,0 +1,167 @@
+---
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import { GitFork, MessageSquare, RadioTower, Server } from 'lucide-react';
+
+const entry = await getEntry('products', 'anchorr');
+if (!entry) throw new Error('Missing "anchorr" entry in the products collection');
+
+const { name, vesselPart, subtitle, tagline, status, repoUrl, partNo, tags } = entry.data;
+const { Content } = await render(entry);
+const isShipped = status === 'shipped';
+
+const highlights = [
+  {
+    icon: MessageSquare,
+    title: 'Discord native',
+    body: 'Manage everything from Discord. Slash commands make requesting and managing media effortless.',
+  },
+  {
+    icon: RadioTower,
+    title: 'Jellyfin & Seerr',
+    body: 'Deep integration means instant notifications when media is added, and requests handled through Seerr.',
+  },
+  {
+    icon: Server,
+    title: 'Self-hosted',
+    body: 'Your data, your server. Run Anchorr on your own infrastructure, for complete control.',
+  },
+];
+---
+
+<BaseLayout
+  title={`${name} · openVESSL`}
+  description={tagline}
+>
+  <section class="border-b border-border">
+    <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20">
+      <div class="console-panel relative rounded-md border border-border bg-card/40 p-6 sm:p-10">
+        <span class="corner corner-tl" aria-hidden="true"></span>
+        <span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span>
+        <span class="corner corner-br" aria-hidden="true"></span>
+
+        <div class="flex items-center justify-between gap-3">
+          <svg class="size-12" viewBox="0 0 345 367" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M269.15 223.667C271.162 228.323 265.534 232.998 261.137 230.47C244.25 220.763 225.629 213.743 205.856 209.995C204.199 209.681 202.794 208.579 202.126 207.032L177.09 149.095C175.352 145.073 169.648 145.073 167.91 149.095L142.873 207.032C142.205 208.579 140.8 209.681 139.144 209.995C119.37 213.743 100.749 220.763 83.8619 230.47C79.4646 232.998 73.8368 228.323 75.8487 223.667L167.91 10.6216C169.648 6.59938 175.352 6.59941 177.09 10.6216L269.15 223.667Z" fill="#CBA6F7"/>
+            <path d="M172.5 234.474C239.965 234.474 297.457 277.164 319.442 337.004C320.609 340.18 318.204 343.474 314.82 343.474H265.229C263.379 343.474 261.688 342.446 260.773 340.838C243.312 310.161 210.322 289.474 172.5 289.474C134.678 289.474 101.688 310.161 84.2272 340.838C83.3119 342.446 81.6213 343.474 79.7708 343.474H30.1797C26.7957 343.474 24.3913 340.18 25.5583 337.004C47.5433 277.164 105.035 234.474 172.5 234.474Z" fill="#CBA6F7"/>
+            <path d="M226.734 321.04C228.127 320.405 229.77 320.564 230.918 321.576C236.827 326.78 244.12 335.508 248.323 342.791C249.346 344.564 248.668 346.786 246.901 347.819C222.416 362.141 203.899 366.474 172.5 366.474C141.426 366.474 122.02 361.426 97.6312 347.318C95.8494 346.287 95.1614 344.05 96.1581 342.249C100.504 334.396 107.196 326.252 114.087 320.503C115.242 319.54 116.853 319.389 118.223 320.011C135.317 327.778 152.252 330.618 172.5 330.618C192.976 330.618 209.54 328.873 226.734 321.04Z" fill="#CBA6F7" fill-opacity="0.27"/>
+            <path d="M200.747 30.247C199.502 27.37 201.901 24.2641 204.98 24.8502C284.721 40.0292 345 110.048 345 194.136C345 231.625 334.552 264.372 314.363 292.456C312.756 294.691 309.429 294.56 307.869 292.291C301.972 283.707 297.646 279.003 290.06 272.885C288.373 271.525 288.027 269.081 289.249 267.29C303.992 245.684 309.111 222.779 309.111 194.136C309.111 134.435 270.742 83.6898 217.298 65.1635C216.221 64.7902 215.34 63.989 214.888 62.9429L200.747 30.247Z" fill="#CBA6F7" fill-opacity="0.27"/>
+            <path d="M131.469 62.4794C131.01 63.5388 130.113 64.3464 129.019 64.7132C74.8887 82.8573 35.8893 133.946 35.8893 194.136C35.8893 223.053 41.7012 244.758 56.766 266.362C57.9901 268.118 57.6839 270.53 56.0511 271.913C48.5852 278.24 43.1714 284.115 37.5791 292.886C36.0526 295.281 32.5955 295.52 30.9317 293.219C10.5487 265.03 0 231.832 0 194.136C0 109.597 60.9271 39.2748 141.305 24.6073C144.376 24.0469 146.751 27.1455 145.512 30.0105L131.469 62.4794Z" fill="#CBA6F7" fill-opacity="0.27"/>
+          </svg>
+          <span
+            class:list={[
+              'flex items-center gap-1.5 rounded-sm border px-2.5 py-1 font-mono text-xs uppercase tracking-wider',
+              isShipped
+                ? 'border-status-shipped/40 bg-status-shipped/10 text-status-shipped'
+                : 'border-status-dev/40 bg-status-dev/10 text-status-dev',
+            ]}
+          >
+            <span
+              class:list={['size-1.5 rounded-full', isShipped ? 'bg-status-shipped' : 'bg-status-dev']}
+              aria-hidden="true"
+            ></span>
+            {isShipped ? 'Shipped' : 'In development'}
+          </span>
+        </div>
+
+        <h1 class="mt-5 font-heading text-4xl font-semibold tracking-tight sm:text-5xl">
+          {name}
+        </h1>
+        <p class="mt-1 font-mono text-xs uppercase tracking-wider text-muted-foreground">
+          {subtitle ?? `${partNo} · ${vesselPart}`}
+        </p>
+
+        <p class="mt-5 max-w-xl text-pretty text-lg text-muted-foreground">
+          {tagline}
+        </p>
+
+        {tags && tags.length > 0 && (
+          <div class="mt-6 flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <span class="rounded-sm border border-border bg-secondary px-2 py-1 font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+
+        <div class="mt-8">
+          <a
+            href={repoUrl}
+            target="_blank"
+            rel="noreferrer"
+            class={cn(buttonVariants({ size: 'lg' }), 'font-mono text-xs uppercase tracking-wider')}
+          >
+            <GitFork className="size-4" aria-hidden="true" />
+            View on GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-border bg-secondary/30">
+    <div class="mx-auto grid max-w-3xl gap-4 px-4 py-12 sm:grid-cols-3 sm:px-6">
+      {highlights.map(({ icon: Icon, title, body }) => (
+        <div class="rounded-md border border-border bg-card p-5">
+          <span class="flex size-9 items-center justify-center rounded-sm border border-border bg-secondary">
+            <Icon className="size-4 text-foreground" strokeWidth={1.75} aria-hidden="true" />
+          </span>
+          <h3 class="mt-3 font-heading text-sm font-semibold tracking-tight">{title}</h3>
+          <p class="mt-1.5 text-sm leading-relaxed text-muted-foreground">{body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <article
+    class="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20
+      [&_h2]:font-heading [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:tracking-tight [&_h2]:mt-12 [&_h2:first-child]:mt-0
+      [&_p]:mt-4 [&_p]:text-muted-foreground [&_p]:leading-relaxed
+      [&_ul]:mt-4 [&_ul]:space-y-2 [&_ul]:text-muted-foreground
+      [&_li]:leading-relaxed [&_li]:pl-1
+      [&_strong]:text-foreground [&_strong]:font-medium"
+  >
+    <Content />
+  </article>
+
+  <section class="border-t border-border">
+    <div class="mx-auto max-w-3xl px-4 py-12 text-center sm:px-6">
+      <p class="text-muted-foreground">
+        That's the overview. Install steps and configuration live in the repo.
+      </p>
+      <div class="mt-5">
+        <a
+          href={repoUrl}
+          target="_blank"
+          rel="noreferrer"
+          class={cn(buttonVariants({ variant: 'outline' }), 'font-mono text-xs uppercase tracking-wider')}
+        >
+          <GitFork className="size-4" aria-hidden="true" />
+          Read the full README
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .console-panel {
+    background-color: color-mix(in oklab, var(--card) 55%, transparent);
+  }
+  .corner {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-color: var(--primary);
+    opacity: 0.85;
+    pointer-events: none;
+  }
+  .corner-tl { top: -1px; left: -1px; border-top: 2px solid; border-left: 2px solid; }
+  .corner-tr { top: -1px; right: -1px; border-top: 2px solid; border-right: 2px solid; }
+  .corner-bl { bottom: -1px; left: -1px; border-bottom: 2px solid; border-left: 2px solid; }
+  .corner-br { bottom: -1px; right: -1px; border-bottom: 2px solid; border-right: 2px solid; }
+</style>
